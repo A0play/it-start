@@ -19,6 +19,7 @@ line x1="100" y1="125" x2="100" y2="175" style="stroke:rgb(0,255,0);strike-width
 <button type="button" id="up">Up, up, and away!</button>
 <button type="button" id="freeze">And...FREEZE.</button>
 <button type="button" id="multiply">99 red balloons (C)</button>
+<button type="button" id="destroy">DESTRUCTION!!!</button>
 </p>
 Popped: <div id="balloonCount">0</div> balloons!
 
@@ -49,6 +50,18 @@ var balloonM = function() {
   shape.setAttributeNS(null, "stroke", "black");
   shape.setAttributeNS(null, "stroke-width", 2);
   shape.setAttributeNS(null, "fill", "red");
+  $("#svg").append(shape);
+  $(shape).click(enlarge);
+}
+
+var balloonD = function() {
+  var shape = document.createElementNS(svgns, "circle");
+  shape.setAttributeNS(null, "cx", Math.floor(Math.random()*450) + 25);
+  shape.setAttributeNS(null, "cy", Math.floor(Math.random()*350));
+  shape.setAttributeNS(null, "r", 30);
+  shape.setAttributeNS(null, "stroke", "red");
+  shape.setAttributeNS(null, "stroke-width", 2);
+  shape.setAttributeNS(null, "fill", "black");
   $("#svg").append(shape);
   $(shape).click(enlarge);
 }
@@ -87,6 +100,15 @@ $("#freeze").click(function() {
 $("#multiply").click(function() {
   for(var i=0 ; i<99; i++) {
     balloonM();
+  }
+  balloonCount = 0;
+  $("#balloonCount").text(balloonCount);
+})
+  
+ 
+$("#destroy").click(function() {
+  for(var i=0 ; i<300; i++) {
+    balloonD();
   }
   balloonCount = 0;
   $("#balloonCount").text(balloonCount);
